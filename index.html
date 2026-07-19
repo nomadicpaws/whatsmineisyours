@@ -327,19 +327,25 @@
     .earth-ring{animation:spin-slow 90s linear infinite;}
   }
   @keyframes spin-slow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-/* ---------- Earth ring motif ---------- */
-  .hero{position:relative;}
-  .earth-ring{
-    position:absolute;
-    top:10px; 
-    left:10px;
-    width:400px;
-    height:400px;
-    opacity:0.8;
-    pointer-events:none;
-    z-index:0;
-    animation: spin-slow 90s linear infinite;
-  }
+/* ---------- 3D Globe Container ---------- */
+.hero {
+  position: relative; 
+}
+
+#earth-container {
+  position: absolute;
+  top: 50px;      
+  left: 50px;     
+  width: 400px;
+  height: 400px;
+  z-index: 0;    
+  pointer-events: none;
+}
+
+.hero > div {
+  position: relative;
+  z-index: 1;      
+}
   /* ---------- Sprig accents ---------- */
   .sprig{position:absolute;width:34px;height:34px;fill:var(--moss);opacity:0.55;pointer-events:none;}
   /* ---------- Seal badge (logo mark) ---------- */
