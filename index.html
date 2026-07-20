@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's Mine is Yours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Anton&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>:root{
     --ink:#241f18;
     --paper:#ece3cd;
@@ -22,6 +31,7 @@
       radial-gradient(circle at 100% 30%, rgba(168,76,43,0.07), transparent 38%);
     background-size: 22px 22px, auto, auto;
     background-repeat: repeat, no-repeat, no-repeat;
+    overflow-x:hidden;
   }
   .mono{font-family:'IBM Plex Mono', monospace;}
   .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
@@ -43,6 +53,8 @@
     display:flex;align-items:center;justify-content:space-between;
     padding:22px 24px;
     max-width:1040px;margin:0 auto;
+    flex-wrap:wrap;
+    gap:12px;
   }
   .brandmark{
     display:flex;align-items:center;gap:10px;
@@ -71,6 +83,7 @@
     grid-template-columns: 1.5fr 1fr;
     gap:48px;
     align-items:start;
+    position:relative;
   }
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
@@ -83,15 +96,17 @@
   }
   .eyebrow::before{content:"";width:26px;height:2px;background:var(--rust);display:inline-block;}
   h1{
-    font-family:'Anton', sans-serif;
-    font-weight:700;
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:800;
+    font-style:normal;
     text-transform:uppercase;
     font-size:clamp(2.6rem, 6vw, 4.4rem);
     line-height:0.98;
     margin:0 0 22px;
-    letter-spacing:0.01em;
+    letter-spacing:0.005em;
   }
-  h1 span{color:var(--rust);}
+  h1 span{color:var(--rust);font-style:italic;font-weight:900;}
   .hero p.sub{
     font-size:1.12rem;
     max-width:46ch;
@@ -121,6 +136,7 @@
     z-index:2;
     transform:rotate(1.6deg);
     box-shadow: 6px 6px 0 rgba(36,31,24,0.14);
+    max-width:100%;
   }
   .tag::before{
     content:"";
@@ -145,6 +161,8 @@
     letter-spacing:0.03em;
     display:flex;justify-content:space-between;align-items:center;
     margin-bottom:16px;
+    flex-wrap:wrap;
+    gap:10px;
   }
   .stamp-badge{
     display:flex;
@@ -183,7 +201,7 @@
   }
   .tag-row:last-of-type{border-bottom:none;}
   .tag-row .k{font-size:0.66rem;text-transform:uppercase;letter-spacing:0.1em;color:#6b6152;}
-  .tag-row a{color:var(--ink);text-decoration:none;}
+  .tag-row a{color:var(--ink);text-decoration:none;word-break:break-word;}
   .tag-row a:hover{color:var(--rust);}
   .tag-foot{
     margin-top:18px;
@@ -312,14 +330,67 @@
     font-family:'IBM Plex Mono', monospace;font-size:0.7rem;letter-spacing:0.06em;
     color:rgba(236,227,205,0.55);text-transform:uppercase;
   }
+  /* ---------- Sprig accents ---------- */
+  .sprig{position:absolute;width:34px;height:34px;fill:var(--moss);opacity:0.55;pointer-events:none;}
+  /* ---------- Seal badge (logo mark) ---------- */
+  .seal-mini{
+    width:36px;height:36px;
+    border-radius:9px;
+    object-fit:cover;
+    flex-shrink:0;
+  }
+  /* Clean terracotta text */
+  .terracotta-bold {
+    color: var(--rust);
+  }
+  /* ---------- 3D Globe Container ---------- */
+  #earth-container {
+    position: absolute;
+    top: -70px;
+    left: -60px;
+    width: 700px;
+    height: 700px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+  .hero > div {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============ RESPONSIVE ============ */
   @media (max-width:820px){
-    .hero{grid-template-columns:1fr;}
-    .mission-grid{grid-template-columns:1fr;}
+    header.top{padding:18px 20px;}
+    nav{display:none;}
+    .hero{grid-template-columns:1fr;padding:28px 20px 50px;gap:32px;}
+    #earth-container{
+      width:420px;height:420px;
+      top:-30px; left:50%;
+      transform:translateX(-50%);
+      opacity:0.55;
+    }
+    .tag{transform:rotate(0deg);margin-top:8px;}
+    .mission-grid{grid-template-columns:1fr;gap:26px;}
     .route{grid-template-columns:1fr;}
     .stop{border-right:none;border-bottom:1px solid var(--ink);}
     .why{grid-template-columns:1fr;}
     .foot-grid{grid-template-columns:1fr;gap:26px;}
-    nav{display:none;}
+    section{padding:48px 0;}
+  }
+  @media (max-width:480px){
+    h1{font-size:2.3rem;}
+    .hero-ctas{flex-direction:column;align-items:stretch;}
+    .hero-ctas .btn{text-align:center;}
+    #earth-container{
+      width:280px;height:280px;
+      top:-15px; left:50%;
+      transform:translateX(-50%);
+      opacity:0.4;
+    }
+    .stamp-badge span{max-width:100%;}
+    .tag-head{flex-direction:column;align-items:flex-start;}
+    blockquote{font-size:1.25rem;}
   }
   @media (prefers-reduced-motion:no-preference){
     .tag{transition:transform 0.3s ease;}
@@ -327,40 +398,9 @@
     .earth-ring{animation:spin-slow 90s linear infinite;}
   }
   @keyframes spin-slow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-/* ---------- 3D Globe Container ---------- */
-.hero {
-  position: relative; 
-}
-
-#earth-container {
-  position: absolute;
- top: 0px;      /* Adjust this to move the globe up or down */
-  left: 50px;   /* Adjust this to move the globe left or right */
-  width: 2500px;  /* Increase or decrease this to change the size */
-  height: 2500px; /* Keep this the same as width to keep it a perfect circle */
-  z-index: 0;    
-  pointer-events: none;
-}
-
-.hero > div {
-  position: relative;
-  z-index: 1;      
-}
-  /* ---------- Sprig accents ---------- */
-  .sprig{position:absolute;width:34px;height:34px;fill:var(--moss);opacity:0.55;pointer-events:none;}
-  /* ---------- Seal badge (logo mark) ---------- */
-
-  .seal-mini{
-    width:36px;height:36px;
-    border-radius:9px;
-    object-fit:cover;
-    flex-shrink:0;
-  }
-
-  /* Clean terracotta text */
-  .terracotta-bold {
-    color: var(--rust);
-  }</style>
+</style>
+</head>
+<body>
 <header class="top">
   <div class="brandmark">
     <img class="seal-mini" src="https://share1.cloudhq-mkt3.net/7cc8f439021ae7.png" alt="What's Mine is Yours seal">What's Mine is Yours
@@ -372,7 +412,7 @@
     <a href="#contact">Get a pickup</a>
   </nav>
 </header>
-<section class="hero" style="padding-top: 12px; border-top: none; position: relative;">
+<section class="hero" style="padding-top: 12px; border-top: none;">
 <div id="earth-container"></div>
   <div>
     <div class="eyebrow">Tucson area · pickup &amp; reuse</div>
@@ -502,43 +542,46 @@
     </div>
     <div class="fineprint">🌎 What's Mine is Yours — Tucson area pickup, reuse &amp; resale</div>
   </div>
-    <script type="module">
+</footer>
+<script type="module">
   import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
   const container = document.getElementById('earth-container');
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  
-  renderer.setSize(450, 450);
-  container.appendChild(renderer.domElement);
 
-  // 1. Create a texture loader
+  function sizeRenderer() {
+    const size = container.clientWidth || 300;
+    renderer.setSize(size, size);
+  }
+
+  renderer.setPixelRatio(window.devicePixelRatio || 1);
+  container.appendChild(renderer.domElement);
+  sizeRenderer();
+
   const loader = new THREE.TextureLoader();
-  // 2. Load an Earth texture (using a public NASA-style map)
   const texture = loader.load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg');
 
   const geometry = new THREE.SphereGeometry(1, 32, 32);
-  // 3. Use MeshPhongMaterial with the map
- const material = new THREE.MeshPhongMaterial({
+  const material = new THREE.MeshPhongMaterial({
     map: texture,
     bumpMap: texture,
     bumpScale: 0.05,
-    transparent: true,  // Tells Three.js this can be see-through
-    opacity: 0.4        // Lower this number to make it 'ghostlier'
+    transparent: true,
+    opacity: 0.4
   });
 
   const globe = new THREE.Mesh(geometry, material);
   scene.add(globe);
 
-  // 4. Add a light so the Earth isn't pitch black
   const light = new THREE.DirectionalLight(0xffffff, 2.5);
   light.position.set(5, 3, 5);
   scene.add(light);
   scene.add(new THREE.AmbientLight(0x333333));
 
-  camera.position.z = 3.5; 
-  globe.position.x = -0.3; 
+  camera.position.z = 3.5;
+  globe.position.x = -0.3;
 
   function animate() {
     requestAnimationFrame(animate);
@@ -546,7 +589,8 @@
     renderer.render(scene, camera);
   }
   animate();
+
+  window.addEventListener('resize', sizeRenderer);
 </script>
 </body>
 </html>
-</footer>
